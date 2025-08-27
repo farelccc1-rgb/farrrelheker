@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Greeting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #d31a61, #e633aa);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        input {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ff5252, #ff4081);
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-section {
+            display: none;
+        }
+
+        .welcome-text {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .love-text {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .heart-animation {
+            font-size: 3rem;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .photo-container {
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .reset-btn {
+            background: linear-gradient(45deg, #2196f3, #21cbf3);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-section" id="inputSection">
+            <h1>💖 Masukkan Namamu</h1>
+            <input type="text" id="nameInput" placeholder="Ketik nama kamu di sini..." autocomplete="off">
+            <button onclick="showWelcome()">Lanjutkan</button>
+        </div>
+
+        <div class="welcome-section" id="welcomeSection">
+            <h2 class="welcome-text" id="welcomeText"></h2>
+            
+            <div class="love-text">
+                <span class="heart-animation">❤️</span>
+                I Love You Sayang
+                <span class="heart-animation">❤️</span>
+            </div>
+
+            <div class="photo-container">
+                <img src="image/IMG-20250614-WA0077.jpg" alt="Romantic couple silhouette against sunset sky with hearts floating in the air" id="lovePhoto">
+            </div>
+
+            <button class="reset-btn" onclick="resetPage()">Ulangi</button>
+        </div>
+    </div>
+
+    <script>
+        function showWelcome() {
+            const name = document.getElementById('nameInput').value.trim();
+            
+            if (name === '') {
+                alert('Silakan masukkan nama terlebih dahulu!');
+                return;
+            }
+
+            const welcomeText = document.getElementById('welcomeText');
+            welcomeText.textContent = `Selamat Datang, ${name}! 💖`;
+            
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('welcomeSection').style.display = 'block';
+        }
+
+        function resetPage() {
+            document.getElementById('nameInput').value = '';
+            document.getElementById('inputSection').style.display = 'block';
+            document.getElementById('welcomeSection').style.display = 'none';
+        }
+
+        // Enter key support
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                showWelcome();
+            }
+        });
+    </script>
+</body>
+</html>
+
